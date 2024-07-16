@@ -1,0 +1,21 @@
+bokeh==3.4.1
+dcor==0.6
+matilda==0.0.1
+matplotlib==3.8.3
+networkx==3.2.1
+numpy==1.26.4
+pandas==2.2.2
+pybind11==2.12.0
+<<<<<<< Updated upstream
+scikit_learn==1.4.2
+scipy==1.13.0
+=======
+rectangle_packer==2.0.2
+scikit_learn==1.5.0
+scipy==1.13.1
+>>>>>>> Stashed changes
+seaborn==0.13.2
+setuptools==68.2.2
+sympy==1.12
+tqdm==4.66.2
+xgboost==2.0.3

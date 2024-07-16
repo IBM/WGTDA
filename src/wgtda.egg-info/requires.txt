@@ -1,0 +1,5 @@
+numpy>=1.21.0
+pandas>=1.3.0
+dcor>=0.6
+scipy>=1.7.0
+matilda@ git+https://github.com/IBM/matilda.git

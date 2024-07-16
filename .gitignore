@@ -1,0 +1,15 @@
+matilda-main
+.idea
+__pycache__
+.DS_Store
+.git
+__pycache__
+.secrets.baseline
+.ruff_cache
+docs/_build/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+.requirements.txt
+

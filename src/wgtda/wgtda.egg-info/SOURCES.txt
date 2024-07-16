@@ -1,0 +1,12 @@
+README.md
+setup.py
+src/wgtda/correlation/__init__.py
+src/wgtda/correlation/computation.py
+src/wgtda/filters/__init__.py
+src/wgtda/filters/filters.py
+src/wgtda/wgtda.egg-info/PKG-INFO
+src/wgtda/wgtda.egg-info/SOURCES.txt
+src/wgtda/wgtda.egg-info/dependency_links.txt
+src/wgtda/wgtda.egg-info/requires.txt
+src/wgtda/wgtda.egg-info/top_level.txt
+test/test.py
