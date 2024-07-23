@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from matilda import FilteredSimplicialComplex, PersistentHomologyComputer
 from numpy import ndarray
-from Typing import Tuple
+from typing import Tuple
 
 
 def construct_vr_complex_rna_matrix(
