@@ -21,7 +21,7 @@ def remove_infinite_holes(df: pd.DataFrame) -> pd.DataFrame:
     return filtered_df
 
 
-def extract_top_n_persistent_holes(df, n=10):
+def extract_top_n_persistent_holes(df: pd.DataFrame, n=10)-> pd.DataFrame:
     """
     Extract the top n% rows for each Betti number based on the specified score column.
 

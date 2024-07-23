@@ -1,7 +1,7 @@
 import ast
 import os
 from typing import TextIO
-
+from typing import Dict, List, Tuple
 import numpy as np
 import pandas as pd
 
@@ -47,7 +47,7 @@ def load_gene_expression_data(file_path: str) -> pd.DataFrame:
 
 def filter_genes(
     gene_expression_df: pd.DataFrame, gene_list_file: TextIO
-) -> tuple[np.ndarray, dict]:
+) -> Tuple[np.ndarray, Dict]:
     """
     Filter gene expression data based on a txt list of genes.
 
@@ -122,8 +122,18 @@ def create_gene_list_file(
             file.write(f"{gene}\n")
 
 
-# Function to convert sting['vertices_set'] to a flattened list of genes in ['gene_set']
-def flatten_gene_list(gene_list_str):
+
+def flatten_gene_list(gene_list_str: List) -> List:
+    """
+    Convert sting['vertices_set'] to a flattened list of genes in ['gene_set']
+
+    Parameters:
+        gene_list_str: 
+        List from dataframe in ['vertices_set']
+
+    Returns:
+       flatten list of genes for ease.
+    """
     try:
         # Convert the string to an actual list of lists
         list_of_lists = ast.literal_eval(gene_list_str)

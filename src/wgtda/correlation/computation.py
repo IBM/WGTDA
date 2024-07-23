@@ -30,7 +30,7 @@ def compute_distance_correlation_matrix(gene_exp_arr: np.ndarray) -> np.ndarray:
     return dist_corr_matrix
 
 
-def compute_wto_matrix(gene_exp_arr: np.ndarray):
+def compute_wto_matrix(gene_exp_arr: np.ndarray)-> np.ndarray:
     """
     Compute the Signed Weighted Topological Overlap (wTO) matrix.
 

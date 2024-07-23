@@ -4,11 +4,12 @@ import numpy as np
 import pandas as pd
 from matilda import FilteredSimplicialComplex, PersistentHomologyComputer
 from numpy import ndarray
+from Typing import Tuple
 
 
 def construct_vr_complex_rna_matrix(
     preprocessing: ndarray, dimensions=3
-) -> tuple[PersistentHomologyComputer, FilteredSimplicialComplex]:
+) -> Tuple[PersistentHomologyComputer, FilteredSimplicialComplex]:
     """
     Construct a Vietoris-Rips complex from the specified preprocessing matrix and compute its persistent homology.
 

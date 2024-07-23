@@ -10,7 +10,8 @@ Weighted Gene Topological Data Analysis (WGTDA) is a topological based framework
 - WGTDA utilizes a set of computational topology techniques used to uncover the intricate local and global topological features of gene expression data.
 - The technique converts gene expression data into a gene-gene correlation-based simplicial complex and employs persistent homology to identify topological interactions at different topological scales.
 - The topological features that are the most persistent are identified as biomarkers.
-- The paper documenting the WGTDA is presented here [WGTDA] (https://arxiv.org/abs/2402.08807)
+- WGTDA uses maTILDA which is a TDA library from IBM to construct the simplicial complex and to perform persisent homology. [maTILDA](https://github.com/IBM/matilda)
+- The paper documenting the WGTDA is presented here [WGTDA](https://arxiv.org/abs/2402.08807)
 
 ## Getting Started
 To install WGTDA:

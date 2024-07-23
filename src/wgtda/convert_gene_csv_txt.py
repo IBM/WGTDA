@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def create_gene_list_file(gene_expression_df, column_name, output_gene_list_file):
+def create_gene_list_file(gene_expression_df: pd.DataFrame, column_name: str, output_gene_list_file: str):
     """
     Create a text file with all the genes from a specified column in the DataFrame.
 
