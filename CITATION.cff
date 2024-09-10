@@ -1,0 +1,26 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: WGTDA
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: 'Ndivhuwo '
+    family-names: Nyase
+    email: n.nyase@gmail.com
+    orcid: 'https://orcid.org/0009-0003-5862-0974'
+  - given-names: Lebohang Happy
+    family-names: Mashatola
+    email: lebohang.mashatola@ibm.com
+    affiliation: IBM
+identifiers:
+  - type: url
+    value: 'https://arxiv.org/abs/2402.08807'
+repository-code: 'https://github.com/IBM/WGTDA'
+abstract: >-
+  A Topological Data Analysis framework for identifying
+  biomarkers in gene expression data.
+license: Apache-2.0
