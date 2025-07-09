@@ -5,7 +5,7 @@
 
 Weighted Gene Topological Data Analysis (WGTDA) is a topological based framework to identify biomarkers for gene expression data. 
 
-![WGTDA Framework](docs/imgs/wgtda_framework.jpg)
+![WGTDA Framework](Biomarker_Discovery_Pipeline.pdf)
 
 - WGTDA utilizes a set of computational topology techniques used to uncover the intricate local and global topological features of gene expression data.
 - The technique converts gene expression data into a gene-gene correlation-based simplicial complex and employs persistent homology to identify topological interactions at different topological scales.
