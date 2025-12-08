@@ -90,6 +90,37 @@ The output file contains the proposed biomarkers identified through the WGTDA an
 
 In the context of topological features, the higher Betti numbers indicate a more complex topological structure with more independent cycles or voids. A higher Betti number suggests increased topological complexity, which may be associated with more intricate and robust biological processes. Furthermore, by focusing on these top persistent interactions, researchers can prioritize genes for further experimental validation and study, ultimately contributing to the understanding and manipulation of lifespan-associated pathways.
 
+# Gene-to-Gene Matrix Computation (WGTDA)
+
+This module provides a clean API and command-line interface for computing
+gene-to-gene matrices (G2G matrices) used in Weighted Gene Topological
+Data Analysis (WG-TDA). These matrices describe pairwise relationships
+between genes using various similarity or correlation measures:
+
+- Pearson correlation
+- Distance correlation
+- Weighted Topological Overlap (WTO)
+- DTEM (Distance to Empirical Measure)
+
+The G2G matrix is the first stage of the WGTDA pipeline before building
+simplicial complexes, computing persistent homology, and generating
+topological features.
+
+
+- Modular correlation methods in `src/correlation/`
+
+# Using as a Python Package
+
+All correlation methods are available directly from Python.
+
+Import the factory
+import numpy as np
+from src.correlation.gene_to_gene_factory import compute_gene_to_gene_matrix
+
+df = np.random.randn(50, 100)  # 50 samples, 100 genes
+
+matrix = compute_gene_to_gene_matrix(df, method="pearson")
+
 ## Citation
 If you use WGTDA for research, please consider citing the
 reference paper:
