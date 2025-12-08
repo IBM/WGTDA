@@ -7,7 +7,7 @@ from .tda_complex import (
 
 def run_biomarker_discovery(matrix, gene_dict, max_dim=2,
                             save_plot=True, filename="pd.png",
-                            title="WG-TDA Biomarker Discovery"):
+                            title="WGTDA Biomarker Discovery"):
 
     st = build_rips_complex(matrix, max_dim)
     diagrams = compute_persistence(st, max_dim)

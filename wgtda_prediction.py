@@ -6,6 +6,9 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, f1_score
 import src.correlation.dtem as dtem
+import src.correlation.wto as wto
+import src.correlation.pearson as pearson
+import src.correlation.distance_corr as dc
 import numpy as np
 
 
@@ -21,6 +24,9 @@ def parse_args():
     parser.add_argument("--log2fc", type=int, default=3.5, 
                         help="Log2 fold change threshold for gene selection."
                 )
+    parser.add_argument("--coexpression", "-c", type=str, default="dtem",
+                        choices=["wto_dc", "wto_pearson", "dc", "pearson", "dtem"])
+    
     parser.add_argument("--max_dim", type=int, default=2,
                         help="Maximum homology dimension to compute.")
     parser.add_argument("--save_landscapes", "-sl", default="landscapes", type=str,
@@ -59,6 +65,7 @@ def main():
     # For example:
     expression_matrix_path = args.gene_expression_matrix
     preselection_genes_path = args.preselection_genes
+    coexpression_method = args.coexpression
     padj_threshold = args.padj_threshold
     log2fc = args.log2fc
     save_landscapes = args.save_landscapes
@@ -103,14 +110,26 @@ def main():
     )
 
 
-    # Compute DTEM matrix for the significant expression matrix
-    print("\n Computing DTEM matrix on training data...")
-    dtem_matrix = dtem.compute_dtem_matrix(X_train_expr)
+    # Compute coexpression matrix for the expression matrix
+    print(f"\n Computing {coexpression_method} matrix on training data...")
+    if coexpression_method == "dtem":
+        coexpression_matrix = dtem.compute_dtem_matrix(X_train_expr)
+    elif coexpression_method == "wto_dc":
+        coexpression_matrix = wto.compute_wto_matrix(X_train_expr, adj_matrix="dc")
+
+    elif coexpression_method == "wto_pearson":
+        coexpression_matrix = wto.compute_wto_matrix(X_train_expr, adj_matrix="pearson")
+
+    elif coexpression_method == "dc":
+        coexpression_matrix = dc.compute_distance_correlation_matrix(X_train_expr)
+    elif coexpression_method == "pearson":
+        coexpression_matrix = pearson.compute_pearson_correlation_matrix(X_train_expr)
+
 
     print("\n🏗 Computing TDA landscapes (train)...")
     landscapes_train = tda_pred.run_prediction_pipeline(
         X_train_expr,
-        dtem_matrix,
+        coexpression_matrix,
         num_layers=num_layers,
         resolution=resolution,
         max_dim=max_dim,
@@ -119,7 +138,7 @@ def main():
     print("\n🏗 Computing TDA landscapes (test)...")
     landscapes_test = tda_pred.run_prediction_pipeline(
         X_test_expr,
-        dtem_matrix,
+        coexpression_matrix,
         num_layers=num_layers,
         resolution=resolution,
         max_dim=max_dim,

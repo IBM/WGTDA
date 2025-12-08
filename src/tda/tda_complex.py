@@ -27,27 +27,64 @@ def save_persistence_diagram(diagrams, filename="pd.png", title="Persistence Dia
     plt.close()
 
 
-def extract_gene_cycles(st, gene_dict):
-    pairs = st.persistence_pairs()
-    interactions = []
+def extract_gene_cycles(st, gene_dict, max_dim: int | None = None) -> pd.DataFrame:
+    """
+    Extract topological interactions from a Gudhi SimplexTree and
+    return an `interactions` DataFrame matching the original WGTDA format.
 
-    for idx, ((dim, (birth, death)), (birth_nodes, death_nodes)) in enumerate(pairs):
-        birth_genes = [gene_dict[i] for i in birth_nodes]
-        death_genes = [gene_dict[i] for i in death_nodes]
+    Columns:
+        interaction_id, betti_number, birth, death, lifespan,
+        birth_nodes, death_nodes, birth_geneset, death_geneset, geneset
+    """
 
-        interactions.append({
-            "interaction_id": idx,
-            "betti_number": dim,
-            "birth": float(birth),
-            "death": float(death),
-            "lifespan": float(death - birth),
-            "birth_nodes": list(birth_nodes),
-            "death_nodes": list(death_nodes),
-            "birth_genes": birth_genes,
-            "death_genes": death_genes,
-            "geneset": birth_genes + death_genes
-        })
+    interactions = pd.DataFrame(
+        columns=[
+            "interaction_id",
+            "betti_number",
+            "birth",
+            "death",
+            "lifespan",
+            "birth_nodes",
+            "death_nodes",
+            "birth_geneset",
+            "death_geneset",
+            "geneset",
+        ]
+    )
+    # Get (betti_number, (birth, death))
+    if max_dim is not None:
+        betti_pairs = st.persistence(persistence_dim_max=max_dim)
+    else:
+        betti_pairs = st.persistence()
 
-    return pd.DataFrame(interactions)
+    # Get the simplex pairs (birth simplex, death simplex)
+    persistence_pairs = st.persistence_pairs()
+
+    interactions_list = []
+
+    for index, (
+        (betti_number, (birth, death)),
+        (birth_nodes, death_nodes),
+    ) in enumerate(zip(betti_pairs, persistence_pairs)):
+        birth_genes = [gene_dict[item] for item in birth_nodes]
+        death_genes = [gene_dict[item] for item in death_nodes]
+        gene_set = birth_genes + death_genes
+        lifespan = death - birth
+        interaction = [
+            index,
+            betti_number,
+            birth,
+            death,
+            lifespan,
+            birth_nodes,
+            death_nodes,
+            birth_genes,
+            death_genes,
+            gene_set,
+        ]
+        interactions_list.append(interaction)
+
+    interactions = pd.DataFrame(interactions_list, columns=interactions.columns)
+    return interactions
 
 

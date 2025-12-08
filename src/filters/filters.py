@@ -90,7 +90,7 @@ def filter_interactions(
     top_n_percent: float = 10.0,
 ) -> pd.DataFrame:
     """
-    Full WG-TDA topological filtering pipeline.
+    Full WGTDA topological filtering pipeline.
 
     Steps:
     1. Remove infinite persistence
