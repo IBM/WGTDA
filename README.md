@@ -3,15 +3,97 @@
 
 # WGTDA (Weighted Gene Topological Data Analysis)
 
-Weighted Gene Topological Data Analysis (WGTDA) is a topological based framework to identify biomarkers for gene expression data. 
+WGTDA is a framework for topological biomarker discovery, network analysis, and classification using persistent homology applied to gene co-expression structures.
+It enables researchers to uncover higher-order gene–gene interaction motifs that are not detectable through classical statistics or machine learning alone.
 
-![WGTDA Framework](docs/imgs/Biomarker_discovery.png)
+This repository provides:
 
-- WGTDA utilizes a set of computational topology techniques used to uncover the intricate local and global topological features of gene expression data.
-- The technique converts gene expression data into a gene-gene correlation-based simplicial complex and employs persistent homology to identify topological interactions at different topological scales.
-- The topological features that are the most persistent are identified as biomarkers.
-- WGTDA uses maTILDA which is a TDA library from IBM to construct the simplicial complex and to perform persisent homology. [maTILDA](https://github.com/IBM/matilda)
-- The paper documenting the WGTDA is presented here [WGTDA](https://arxiv.org/abs/2402.08807)
+- Biomarker discovery pipeline → Generates persistent interactions and co-occurrence networks.
+
+- Prediction pipeline → Uses topological embeddings (e.g., persistence landscapes) for classification.
+
+- Interactive Streamlit dashboard → Visualize WGTDA networks, hub genes, and scale-free topology.
+
+![WGTDA Framework](docs/imgs/WGTDA_Framework.pdf)
+![WGTDA Web Application](docs/imgs/WGTDA_web.pdf)
+
+### Repo Structure 
+
+WGTDA/
+│
+├── wgtda_discovery.py         # Biomarker discovery pipeline (interactions.csv)
+├── wgtda_prediction.py        # TDA landscape-based classification
+├── wgtda_app.py               # Streamlit dashboard
+│
+├── src/
+│   ├── correlation/           # DTEM, wTO, Pearson, DC computation
+│   ├── tda/                   # Rips complex, persistence, biomarker pipeline
+│   ├── web_app/               # Visualization + network stats
+│   └── filters/               # Lifespan filtering for interactions
+│
+├── interactions/              # Automatically stored interactions CSVs
+└── README.md
+
+1. Biomarker Discovery Pipeline
+
+![Biomarker Discovery Pipeline](Cohort_framework.png)
+
+This pipeline generates:
+
+- Persistence diagrams
+
+- Topological interaction tables (interactions.csv)
+
+- Genesets for hubs and cycles
+
+- WGTDA co-occurrence network
+
+```bash 
+python wgtda_discovery.py -p data/treatment_response/cptac_radiotherapy/fpkm_matrix.csv -pp data/treatment_response/cptac_radiotherapy/sig_genes.csv -padj 3 -l 2
+streamlit run wgtda_app.py
+```
+
+Interactive WGTDA Dashboard
+
+Run manually:
+```bash
+streamlit run wgtda_app.py
+```
+
+Upload interactions.csv and explore:
+
+Features:
+
+✓ Interactive gene–gene network
+✓ WGTDA hub gene identification
+✓ Betweenness, degree, and lifespan metrics
+✓ Scale-free topology fitting
+✓ Downloadable CSVs for all tables
+
+3. Classification Pipeline (TDA Landscapes)
+
+![WGTDA Classification Pipeline](docs/imgs/ML_framework.png)
+
+This pipeline uses:
+
+- Coexpression matrix
+
+- Rips complex
+
+- Persistence diagrams
+
+- Persistence landscapes
+
+```bash
+python wgtda_prediction.py -p data/treatment_response/cptac_radiotherapy/fpkm_matrix.csv -pp data/treatment_response/cptac_radiotherapy/sig_genes.csv
+```
+
+Outputs:
+
+- landscapes.npy
+
+- Accuracy & F1 score
+
 
 ## Getting Started
 To install WGTDA:
