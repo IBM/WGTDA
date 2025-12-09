@@ -40,7 +40,7 @@ WGTDA/
 
 ## 1. Biomarker Discovery Pipeline
 
-![Biomarker Discovery Pipeline](Cohort_framework.png)
+![Biomarker Discovery Pipeline](docs/imgs/Cohort_framework.png)
 
 This pipeline generates:
 
