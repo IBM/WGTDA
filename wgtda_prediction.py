@@ -29,7 +29,7 @@ def parse_args():
     
     parser.add_argument("--max_dim", type=int, default=2,
                         help="Maximum homology dimension to compute.")
-    parser.add_argument("--save_landscapes", "-sl", default="landscapes", type=str,
+    parser.add_argument("--save_landscapes", "-sl", default="landscapes/landscape", type=str,
                         help="Path to save the computed TDA landscapes.")
     parser.add_argument("--num_layers", type=int, default=2,
                         help="Number of landscape layers.")
