@@ -2,7 +2,7 @@
 ![License](https://img.shields.io/badge/license-Apache%202.0-green)
 ![tda](https://img.shields.io/badge/Topological%20Data%20Analysis-WGTDA-purple)
 ![streamlit](https://img.shields.io/badge/Streamlit-app-red?logo=streamlit)
-[![arXiv](https://img.shields.io/badge/arXiv-2401.01234-b31b1b.svg)](https://arxiv.org/abs/2402.08807)
+[![arXiv](https://img.shields.io/badge/arXiv-2402.08807-b31b1b.svg)](https://arxiv.org/abs/2402.08807)
 
 
 # WGTDA (Weighted Gene Topological Data Analysis)
