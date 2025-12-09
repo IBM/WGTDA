@@ -1,0 +1,5 @@
+,interaction_id,betti_number,birth,death,lifespan,birth_nodes,death_nodes,birth_geneset,death_geneset,geneset
+22,22,0,0.0,0.3712919828209196,0.3712919828209196,"[21, 15, 10]","[21, 15, 12, 10]","['CYCS', 'ABL1', 'BAX']","['CYCS', 'ABL1', 'CDKN1B', 'BAX']","['CYCS', 'ABL1', 'BAX', 'CYCS', 'ABL1', 'CDKN1B', 'BAX']"
+21,21,0,0.0,0.3610083392728205,0.3610083392728205,"[23, 8, 3]","[23, 20, 12, 8]","['CASP9', 'CASP8', 'CCND1']","['CASP9', 'BID', 'CDKN1B', 'CASP8']","['CASP9', 'CASP8', 'CCND1', 'CASP9', 'BID', 'CDKN1B', 'CASP8']"
+20,20,0,0.0,0.34986557810671215,0.34986557810671215,"[23, 1]","[23, 12, 2]","['CASP9', 'CDKN1A']","['CASP9', 'CDKN1B', 'FAS']","['CASP9', 'CDKN1A', 'CASP9', 'CDKN1B', 'FAS']"
+29,29,1,0.29057579932235916,0.3001424415716279,0.00956664224926873,"[18, 9]","[23, 20, 18]","['RB1', 'AKT1']","['CASP9', 'BID', 'RB1']","['RB1', 'AKT1', 'CASP9', 'BID', 'RB1']"
