@@ -8,7 +8,7 @@ setup(
     version="0.1.0",
     description="A python package to identify biomarkers in bulk RNAseq data",
     author="IBM Research Africa",
-    author_email=["n.nyase@gmail.com", "lebohang.mashatola@ibm.com"],
+    author_email=["ndivhuwo.nyase@ibm.com", "lebohang.mashatola@ibm.com"],
     package_dir={"": "src"},
     packages=find_packages(where="src"),
     long_description=open("README.md").read(),

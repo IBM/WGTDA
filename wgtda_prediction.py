@@ -77,7 +77,6 @@ def main():
     # Load your data using the provided file paths
     expression_matrix = pd.read_csv(expression_matrix_path)
     preselection_genes = pd.read_csv(preselection_genes_path, index_col=0).index.tolist()
-    print(preselection_genes)
     phenotype = expression_matrix["phenotype"]
     gene_list = preselection_genes
     print(gene_list)

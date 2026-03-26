@@ -12,9 +12,9 @@ def parse_args():
     parser = argparse.ArgumentParser(description="Run the prediction pipeline.")
     parser.add_argument("--gene_expression_matrix", "-p", type=str, required=True,
                         help="Path to the gene expression matrix file.")
-    parser.add_argument("--preselection_genes", "-pp", type=str, required=True,
+    parser.add_argument("--preselection_genes", "-pp", type=str, default=None, required=False,
                         help="Path to the preselection genes file.")
-    parser.add_argument("--coexpression", "-c", type=str, default="dtem",
+    parser.add_argument("--coexpression", "-c", type=str, default="wto_pearson",
                         choices=["wto_dc", "wto_pearson", "dc", "pearson", "dtem"])
     
     parser.add_argument("--padj_threshold", "-padj", type=float, default=None,
@@ -50,7 +50,8 @@ def main():
         print(f"Applying DEG filtering: padj < {args.padj_threshold}, |log2FC| > {args.log2fc}")
 
     expr_df = pd.read_csv(args.gene_expression_matrix)
-    preselection_df = pd.read_csv(args.preselection_genes, index_col=0)
+    if preselection_genes_path is not None:
+        preselection_df = pd.read_csv(preselection_genes_path, index_col=0)
 
 
     # --- Optional DEG filtering ---
@@ -72,17 +73,20 @@ def main():
         ]
         gene_list = deg_filtered.index.tolist()
         print(f"✅ Genes after DEG filtering: {len(gene_list)}")
+        expr_sub = expr_df[gene_list].copy()
     else:
             print("ℹ️ No DEG filtering applied; using full preselection gene list.")
+            expr_sub = expr_df
+            gene_list = expr_df.columns.tolist()  # Use all genes from the expression matrix if no preselection provided
+            print(f"✅ Using {len(gene_list)} genes from the expression matrix.")
 
-    expr_sub = expr_df[gene_list].copy()
+    
 
     X = expr_sub.values  # shape (n_samples, n_genes)
     n_genes = X.shape[1]
     gene_dict = {i: gene_list[i] for i in range(n_genes)}
 
-    # Get initial gene list from preselection file
-    gene_list = preselection_df.index.tolist()
+
     print(f"✅ Loaded expression matrix with shape {expr_df.shape}")
     print(f"✅ Preselection genes: {len(gene_list)}")
 

@@ -53,7 +53,7 @@ This pipeline generates:
 - WGTDA co-occurrence network
 
 ```bash 
-python wgtda_discovery.py -p data/treatment_response/cptac_radiotherapy/fpkm_matrix.csv -pp data/treatment_response/cptac_radiotherapy/sig_genes.csv -padj 3 -l 2
+python wgtda_discovery.py -p data/paper/clinical_outcome_prediction/treatment_response_radiotherapy/fpkm_matrix.csv -pp data/paper/clinical_outcome_prediction/treatment_response_radiotherapy/DEG_genes.csv -padj 3 -l 2
 streamlit run wgtda_app.py
 ```
 As an example please find the input file for the streamlit web application in folder interactions!!!
@@ -75,7 +75,7 @@ Features:
 ✓ Scale-free topology fitting
 ✓ Downloadable CSVs for all tables
 
-3. Classification Pipeline (TDA Landscapes)
+## 3. Classification Pipeline (TDA Landscapes)
 
 ![WGTDA Classification Pipeline](docs/imgs/ML_framework.png)
 
@@ -162,6 +162,64 @@ To install WGTDA:
 
 
 Have a look at the tutorial for more detailed usage of WGTDA [link to tutorial](tutorials/tutorial.ipynb)
+
+## Running the Test Suite
+
+WGTDA uses [`pytest`](https://docs.pytest.org/) for automated testing. The configuration in `pytest.ini` sets up:
+
+- Test discovery in the `tests/` directory for files matching `test_*.py`
+- `src/` added to `PYTHONPATH` automatically
+- Coverage reporting for the `src/` package via `pytest-cov`
+- Coloured output with `-s` (stdout not captured, so print statements are visible)
+
+### Install test dependencies
+
+From the repository root (ideally inside a clean conda/virtual environment):
+
+```bash
+pip install pytest pytest-cov
+```
+
+### Run all tests
+
+```bash
+pytest
+```
+
+### Run with verbose output
+
+```bash
+pytest -v
+```
+
+### Run a specific test module
+
+```bash
+# DTEM correlation tests
+pytest tests/test_correlation/test_dtem.py
+
+# Pearson correlation tests
+pytest tests/test_correlation/test_pearson.py
+
+# Distance correlation tests
+pytest tests/test_correlation/test_distance_corr.py
+
+# Weighted Topological Overlap tests
+pytest tests/test_correlation/test_wto.py
+```
+
+### Repository layout for tests
+
+```
+tests/
+├── conftest.py                  # Injects src/ and repo root into sys.path
+└── test_correlation/
+    ├── utils.py                 # Shared sample_data() fixture
+    ├── test_dtem.py
+    ├── test_pearson.py
+    ├── test_distance_corr.py
+    └── test_wto.py
+```
 
 ### Outputs (Topological Gene Interactions)
 
